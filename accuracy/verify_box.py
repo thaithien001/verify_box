@@ -63,17 +63,15 @@ class accuracy_boxes():
             if _box_check != 0 and iou_check > box_true['iou']:
                 _box_check.append(box)
                 box_true['boxes'] = _box_check.copy()
-                box_true['iou']
-        
+                box_true['iou'] = iou_check
         try:
             #Calculate avg boxes and accuracy box with label_name
             label_name = self.check_labels(self.label_names)
             val_box = [0,0,0,0]
             for box in box_true['boxes']:
-                if box[4] == label_name:
-                    val_box = np.add(val_box,box[:4])
-
-            box_avg = (val_box//self.label_names.count(label_name)).tolist()
+                # if box[4] == label_name:
+                val_box = np.add(val_box,box[:4])
+            box_avg = (val_box//(len(box_true)+1)).tolist()
             result_acc = {
                 'label_name': label_name,
                 'accuracy_box': {},

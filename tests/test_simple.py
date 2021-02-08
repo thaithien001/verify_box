@@ -18,7 +18,18 @@ class simple_test(TestCase):
         cv2.imshow('before',all_img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-        
-
+        acc = accuracy_boxes(boxes)
+        results = acc.verify_boxes()
+        image = []
+        for box in boxes:
+            accuracy = results['accuracy_box'].get(box[5])
+            if accuracy != None:
+                image.append(draw_box(img,box[:4],box[5]+'_'+str(accuracy)+'%'))
+            else:
+                image.append(draw_box(img,box[:4],box[5]+'_0%'))
+        all_img = show_result(image)
+        cv2.imshow('after',all_img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 if __name__ == '__main__':
     unittest.main(verbosity=2)

@@ -8,6 +8,6 @@ setup(name='verify_box',
       author_email='thien.nguyenthai.ncc@gmail.com',
       license='MIT',
       packages=['accuracy'],
-      install_requires=['numpy'],
+      install_requires=['numpy','opencv-python'],
       python_requires='~=3.3',
       zip_safe=False)
